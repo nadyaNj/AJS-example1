@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular js project</title>
+    <script src="js/app.js" type="text/javascript" ></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+<div ng-app="basket" ng-controller="OrderFormController">
+
+    <div class="bar">
+        <input type="text" ng-model="searchString" placeholder="Enter your search terms" />
+    </div>
+
+    <form ng-app ng-controller="OrderFormController">
+        <ul>
+
+            <li ng-repeat="i in items | searchFor:searchString"  ng-class="{active:i.active}">
+                <div class="information">
+                    <a href="{{i.url}}"><img ng-src="{{i.image}}" /></a>
+                    <p>{{i.title}}</p>
+                    <p>{{i.price | currency}}</p>
+                </div>
+                <div class="currency" ng-click="toggle = !toggle">
+                    <button ng-click="addBasket(i) |  currency" ><span ng-show="toggle">Remove From Basket</span><span ng-hide="toggle">Add To Basket</span></button>
+
+
+                </div>
+            </li>
+        </ul>
+        <div class="total">
+            <!-- Calculate the total price of all chosen services. Format it as currency. -->
+            Total: <span>{{total() | currency}}</span>
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>
